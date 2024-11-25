@@ -1,5 +1,4 @@
 <?php
-
 class DBConnect {
     private static $instance = null;
     private $db; 
@@ -24,7 +23,6 @@ class DBConnect {
         return self::$instance;
     }
 
-    // Getter for the PDO instance
     public function getConnection() {
         return $this->db;
     }

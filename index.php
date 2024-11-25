@@ -1,32 +1,22 @@
 <?php
+require_once 'Router.php';
+require_once './controller/HomeController.php';
+require_once './controller/AdminUserController.php';
 
-class Router 
-{
-    protected $routes = [];
+/**
+ * route url need to start with /
+ */
+$router = new Router();
 
-    public function register($routes)
-    {
-        $this->routes = $routes;
-    }
+$router->get('/', [HomeController::class, 'index']);
+$router->get('/admin-users', [AdminUserController::class, 'index']);
 
-    public function direct($uri)
-    {
-        if(array_key_exists($uri, $this->routes)) {
-            return $this->routes[$uri];
-        }
-    }
-}
+// Define a POST route
+$router->post('/submit', function () {
+    return "Form submitted successfully!";
+});
 
-$router = new Router;
-$router->register([
-    ""      => "controller/AdminUserController.php",
-    "about" => "controller/AboutController.php"
-]);
-// require_once "routes.php";
-
-require  $router->direct(trim($_SERVER['REQUEST_URI'], '/'));
-
-// require_once "index.view.php";
-
-
-
+// Resolve the route
+$method = $_SERVER['REQUEST_METHOD'];
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$router->resolve($method, $path);

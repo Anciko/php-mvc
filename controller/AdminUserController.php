@@ -2,9 +2,11 @@
 
 require_once "./model/Admin.php";
 
-$admins = Admin::all();
+class AdminUserController extends Controller {
+    public function index()
+    {
+        $admins = Admin::all();
+        $this->view('admin', ['admins' => $admins]);
+    }
+}
 
-
-
-
-require_once "./index.view.php";
