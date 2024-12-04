@@ -1,18 +1,32 @@
 <?php
 
-function DBConnection()
+function dd($value)
 {
-    try {
-        $pdo = new PDO("mysql:host=localhost;dbname=user_management", "root", "");
-        return $pdo;
-    } catch (Exception $e) {
-        echo $e->getMessage();
+    echo "<pre>";
+    die(var_dump($value));
+}
+
+function redirectRoute($uri)
+{
+    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
+    $host = $_SERVER["HTTP_HOST"];
+
+    $redirect_url = $protocol . $host . $uri;
+
+    header("location: $redirect_url");
+    exit;
+}
+
+function redirectBackIfNotAuthUser()
+{
+    session_start();
+
+    if (!isset($_SESSION['auth_user'])) {
+        redirectRoute('/login');
     }
 }
 
-function fetchAdminUser($pdo)
+function section($path)
 {
-    $statement = $pdo->prepare('SELECT * FROM admin_users');
-    $statement->execute();
-    return $statement->fetchAll(PDO::FETCH_OBJ);
+   require_once __DIR__ . "/view/$path.view.php";
 }

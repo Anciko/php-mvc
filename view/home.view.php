@@ -1,1 +1,8 @@
-I am Home VIew Asshole! <?php echo $data ?>
+<?php redirectBackIfNotAuthUser(); ?>
+<?php section('layout/header'); ?>
+
+
+
+
+
+<?php section('layout/footer'); ?>

@@ -15,31 +15,37 @@ class Router {
     }
 
     public function resolve($method, $path) {
-        $callback = $this->routes[$method][$path] ?? null;
+        $routes = $this->routes[$method] ?? [];
 
-        if (!$callback) {
-            http_response_code(404);
-            echo "404 Not Found";
-            return;
-        }
+        foreach ($routes as $route => $callback) {
+            $pattern = preg_replace('#\{([a-zA-Z0-9_]+)\}#', '([a-zA-Z0-9_]+)', $route);
+            $pattern = "#^" . $pattern . "$#";
 
-        if (is_array($callback)) {
-            $controller = new $callback[0];
-            $method = $callback[1];
+            if (preg_match($pattern, $path, $matches)) {
+                array_shift($matches); // Remove the full match
 
-            if (method_exists($controller, $method)) {
-                echo call_user_func([$controller, $method]);
+                if (is_array($callback)) {
+                    $controller = new $callback[0];
+                    $method = $callback[1];
+
+                    if (method_exists($controller, $method)) {
+                        echo call_user_func_array([$controller, $method], $matches);
+                        return;
+                    }
+                }
+
+                if (is_callable($callback)) {
+                    echo call_user_func_array($callback, $matches);
+                    return;
+                }
+
+                http_response_code(500);
+                echo "Internal Server Error: Invalid callback.";
                 return;
             }
         }
 
-        if (is_callable($callback)) {
-            echo call_user_func($callback);
-            return;
-        }
-
-        http_response_code(500);
-        echo "Internal Server Error: Invalid callback.";
+        http_response_code(404);
+        echo "404 Not Found";
     }
 }
-
