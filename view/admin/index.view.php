@@ -9,16 +9,16 @@
                 </div>
                 <hr>
                 <?php foreach ($admins as $admin): ?>
-                   <p> <?php echo $admin->name . " => " . $admin->email; ?> </p>
-                   <div class="d-flex gap-2">
-                        <a href="edit.php?id=<?php echo $admin->id; ?>" class="btn btn-success">Edit</a>
-                        <form action="delete.php"
-                         method="post">
-                         <input type="hidden" name="id" value="<?php echo $admin->id; ?>">
-                                <button class="btn btn-danger">Delete</button>
+                    <p> <?php echo $admin->name . " => " . $admin->email; ?> </p>
+                    <div class="d-flex gap-2">
+                        <a href="admin-users/<?php echo $admin->id; ?>/edit" class="btn btn-success">Edit</a>
+                        <form action="/admin-users/<?php echo $admin->id; ?>/delete"
+                        method="post">
+                            <input type="hidden" name="id" value="<?php echo $admin->id; ?>">
+                            <button class="btn btn-danger">Delete</button>
                         </form>
-                   </div>
-                   <hr>
+                    </div>
+                    <hr>
                 <?php endforeach;?>
             </div>
         </div>

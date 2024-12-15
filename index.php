@@ -22,9 +22,9 @@ $router->get('/', [HomeController::class, 'index']);
 $router->get('/admin-users', [AdminUserController::class, 'index']);
 $router->get('/admin-users/create', [AdminUserController::class, 'create']);
 $router->post('/admin-users', [AdminUserController::class, 'store']);
-$router->get('/admin-users/{id}', function($id) {
-    dd($id);
-});
+$router->get('/admin-users/{id}/edit', [AdminUserController::class, 'edit']);
+$router->post('/admin-users/{id}/update', [AdminUserController::class, 'update']);
+$router->post('/admin-users/{id}/delete', [AdminUserController::class, 'destroy']);
 
 
 // Define a POST route

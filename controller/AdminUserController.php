@@ -23,19 +23,23 @@ class AdminUserController extends Controller {
         redirectRoute('/admin-users');
     }
 
-    public function edit()
+    public function edit($id)
     {
-        $this->view('admin/edit');
+        $admin = Admin::getAdminById($id);
+        $this->view('admin/edit', compact('admin'));
     }
 
-    public function update()
+    public function update($id)
     {
-
+        Admin::update($id);
+        redirectRoute('/admin-users');
     }
 
-    public function destroy()
-    {
 
+    public function destroy($id)
+    {
+        Admin::delete($id);
+        redirectRoute('/admin-users');
     }
 }
 
