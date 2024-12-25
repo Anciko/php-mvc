@@ -28,5 +28,5 @@ function redirectBackIfNotAuthUser()
 
 function section($path)
 {
-   require_once __DIR__ . "/view/$path.view.php";
+    require_once __DIR__ . "/view/$path.view.php";
 }

@@ -14,12 +14,12 @@
                     </div>
 
                     <div class="mb-3 form-check">
-                      <label class="form-label">Role</label>
-                      <select class="form-select" name="role_id">
-                          <option value="1">Super Admin</option>
-                          <option value="2">Admin</option>
-                          <option value="3">Account</option>
-                      </select>
+                        <label class="form-label">Role</label>
+                        <select class="form-select" name="role_id">
+                            <?php foreach ($roles as $role): ?>
+                            <option value="<?php echo $role->id; ?>"><?php echo $role->name; ?></option>
+                            <?php endforeach;?>
+                        </select>
                     </div>
 
                     <div class="mb-3">
@@ -40,10 +40,10 @@
                     <div class="mb-3">
                         <label for="gender" class="form-label">Gender</label>
                         <select class="form-select" name="gender">
-                          <option value="male">Male</option>
-                          <option value="female">Female</option>
-                          <option value="other">Other</option>
-                      </select>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
                     </div>
 
                     <div class="mb-3">
@@ -54,11 +54,11 @@
                     <div class="mb-3">
                         <label for="is_active" class="form-label">Status</label>
                         <select class="form-select" name="is_active">
-                          <option value="1">Active</option>
-                          <option value="0">Inactive</option>
-                      </select>
+                            <option value="1">Active</option>
+                            <option value="0">Inactive</option>
+                        </select>
                     </div>
-                  
+
                     <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>

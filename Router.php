@@ -22,7 +22,7 @@ class Router {
             $pattern = "#^" . $pattern . "$#";
 
             if (preg_match($pattern, $path, $matches)) {
-                array_shift($matches); // Remove the full match
+                array_shift($matches);
 
                 if (is_array($callback)) {
                     $controller = new $callback[0];

@@ -1,29 +1,34 @@
 <?php
 
-require_once "./model/Admin.php";
+require_once './controller/Controller.php';
 require_once "./model/Role.php";
+require_once "./model/Permission.php";
 
-class AdminUserController extends Controller {
+class RoleController extends Controller
+{
     public function __construct()
     {
         redirectBackIfNotAuthUser();
     }
+
     public function index()
     {
-        $admins = Admin::all();
-        $this->view('admin/index', ['admins' => $admins]);
+        $roles = Role::all();
+        $this->view('role/index', compact('roles'));
     }
-
+    
     public function create()
     {
-        $roles = Role::all();
-        $this->view('admin/create', compact('roles'));
+        $permissions = Permission::all();
+        // dd($permissions);
+        $this->view('role/create', compact('permissions'));
     }
 
     public function store()
     {
-        Admin::create();
-        redirectRoute('/admin-users');
+        dd($_POST);
+        Role::create();
+        redirectRoute('/roles');
     }
 
     public function edit($id)
@@ -45,4 +50,3 @@ class AdminUserController extends Controller {
         redirectRoute('/admin-users');
     }
 }
-

@@ -22,6 +22,9 @@
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/roles">Roles</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="/admin-users">Admin Users</a>
         </li>
         

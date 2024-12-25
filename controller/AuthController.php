@@ -3,7 +3,6 @@
 require_once './controller/Controller.php';
 require_once "./model/Admin.php";
 
-
 class AuthController extends Controller
 {
     public function index()
