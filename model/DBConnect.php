@@ -10,7 +10,7 @@ class DBConnect {
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             ];
-            $this->db = new PDO("mysql:host=localhost;dbname=user_management", "root", "", $options);
+            $this->db = new PDO("mysql:host=localhost;dbname=pico_sbs", "root", "", $options);
         } catch (Exception $e) {
             echo $e->getMessage();
         }

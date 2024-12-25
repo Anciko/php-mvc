@@ -27,6 +27,8 @@ $router->post('/admin-users/{id}/update', [AdminUserController::class, 'update']
 $router->post('/admin-users/{id}/delete', [AdminUserController::class, 'destroy']);
 
 
+
+
 // Define a POST route
 $router->post('/submit', function () {
     return "Form submitted successfully!";
