@@ -16,7 +16,7 @@ class AdminUserController extends Controller {
 
     public function create()
     {
-        $roles = Role::all();
+        $roles = Role::getOnlyRoles();
         $this->view('admin/create', compact('roles'));
     }
 

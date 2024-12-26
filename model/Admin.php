@@ -53,7 +53,7 @@ class Admin extends BaseModel
             $statement->bindParam(":email", $_POST['email']);
             $statement->bindParam(":address", $_POST['address']);
             $statement->bindParam(":gender", $_POST['gender']);
-            $statement->bindParam(":password", $_POST['password']);
+            $statement->bindParam(":password", password_hash($_POST['password'], PASSWORD_DEFAULT));
             $statement->bindParam(":is_active", $_POST['is_active']);
             $statement->bindParam(":created_at", date('Y-m-d H:i:s'));
 

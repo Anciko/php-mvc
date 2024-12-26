@@ -16,7 +16,7 @@ class RoleController extends Controller
         $roles = Role::all();
         $this->view('role/index', compact('roles'));
     }
-    
+
     public function create()
     {
         $permissions = Permission::all();
@@ -26,27 +26,30 @@ class RoleController extends Controller
 
     public function store()
     {
-        dd($_POST);
+        // dd($_POST);
         Role::create();
         redirectRoute('/roles');
     }
 
     public function edit($id)
     {
-        $admin = Admin::getAdminById($id);
-        $this->view('admin/edit', compact('admin'));
+        $role = Role::getRoleById($id);
+        $permissions = Permission::all();
+        $old_permissions = array_column($role['permissions'], 'id');
+
+        $this->view('role/edit', compact('role','permissions', 'old_permissions'));
     }
 
     public function update($id)
     {
-        Admin::update($id);
-        redirectRoute('/admin-users');
+        $newPermissionIds = $_POST['permission_id'];
+        Role::update($id, $newPermissionIds);
+        redirectRoute('/roles');
     }
-
 
     public function destroy($id)
     {
-        Admin::delete($id);
-        redirectRoute('/admin-users');
+        Role::delete($id);
+        redirectRoute('/roles');
     }
 }
