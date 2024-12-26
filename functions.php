@@ -26,6 +26,15 @@ function redirectBackIfNotAuthUser()
     }
 }
 
+function authUserId() {
+    $auth_user_id = $_SESSION['auth_user_id'];
+    if (isset($_SESSION['auth_user_id'])) {
+        return $auth_user_id;
+    } else {
+        dd('Auth user id not found...');
+    }
+}
+
 function section($path)
 {
     require_once __DIR__ . "/view/$path.view.php";
